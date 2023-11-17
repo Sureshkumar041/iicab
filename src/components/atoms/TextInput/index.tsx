@@ -1,15 +1,26 @@
 import {
+  Image,
+  StyleProp,
   StyleSheet,
   TextInput,
   TextInputProps,
   TouchableOpacity,
   View,
+  ViewProps,
+  ViewStyle,
 } from 'react-native';
 import IText from '../Text';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react';
-import {BORDER_INPUT, GREY, PLACEHOLDER} from '../../../common/colors';
+import {
+  BLUE,
+  BORDER_INPUT,
+  GREY,
+  LIGHTBLUE,
+  PLACEHOLDER,
+} from '../../../common/colors';
 import TextLabel from '../TextLabel';
+import UserPng from '../../../assets/icons/user.png';
 
 interface ITextInputProps {
   value?: any;
@@ -21,6 +32,8 @@ interface ITextInputProps {
   placeholder?: TextInputProps['placeholder'];
   secureTextEntry?: boolean;
   multiline?: boolean;
+  containerStyle?: StyleProp<ViewStyle>;
+  iconName?: string;
 }
 
 const ITextInput: React.FC<ITextInputProps> = ({
@@ -33,18 +46,20 @@ const ITextInput: React.FC<ITextInputProps> = ({
   secureTextEntry,
   placeholder,
   multiline,
+  containerStyle,
+  iconName,
 }) => {
   const [secureText, setSecureText] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   return (
-    <View style={{marginBottom: 12}}>
+    <View style={[{marginBottom: 12}, containerStyle]}>
       {label && <TextLabel>{label}</TextLabel>}
       <View
         style={[
           styles.textContainer,
           {
-            borderColor: isFocus ? '#3276B1' : BORDER_INPUT,
+            borderColor: isFocus ? LIGHTBLUE : BORDER_INPUT,
           },
         ]}>
         <TextInput
@@ -60,35 +75,46 @@ const ITextInput: React.FC<ITextInputProps> = ({
           numberOfLines={numberOfLines}
           editable={editable}
           keyboardType={keyboardType}
-          secureTextEntry={secureText && secureTextEntry}
+          secureTextEntry={!secureText && secureTextEntry}
           multiline={multiline}
           onFocus={(e: any) => setIsFocus(true)}
           onBlur={(e: any) => setIsFocus(false)}
         />
-        {secureTextEntry && (
+        {iconName && (
           <View
             style={{
+              borderLeftWidth: 1,
+              borderColor: BORDER_INPUT,
+              borderTopEndRadius: 4,
+              borderBottomEndRadius: 4,
+              height: '100%',
               flexDirection: 'row',
-              columnGap: 8,
               justifyContent: 'center',
               alignItems: 'center',
+              paddingHorizontal: 8,
+              // backgroundColor: '#f5f5f6',
             }}>
-            <View
-              style={{
-                height: 22,
-                width: 2,
-                backgroundColor: GREY,
-                borderRadius: 10,
-              }}></View>
-            <TouchableOpacity onPress={() => setSecureText(!secureText)}>
-              {secureText ? (
-                <Ionicons name="eye" style={{fontSize: 20, color: GREY}} />
-              ) : (
-                <Ionicons name="eye-off" style={{fontSize: 20, color: GREY}} />
-              )}
-            </TouchableOpacity>
+            {iconName === 'email' && (
+              <Image
+                source={UserPng}
+                style={{width: 20, height: 20, tintColor: BORDER_INPUT}}
+              />
+            )}
+            {iconName === 'password' && (
+              <TouchableOpacity onPress={() => setSecureText(!secureText)}>
+                {secureText ? (
+                  <Ionicons name="eye" style={{fontSize: 20, color: BORDER_INPUT}} />
+                ) : (
+                  <Ionicons
+                    name="eye-off"
+                    style={{fontSize: 20, color: BORDER_INPUT}}
+                  />
+                )}
+              </TouchableOpacity>
+            )}
           </View>
         )}
+       
       </View>
     </View>
   );
@@ -106,8 +132,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 4,
+    borderRadius: 5,
     columnGap: 8,
-    paddingHorizontal: 8,
+    paddingLeft: 8,
   },
 });

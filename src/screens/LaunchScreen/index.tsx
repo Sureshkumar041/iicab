@@ -19,7 +19,7 @@ const LaunchScreen = () => {
         <IButton
           title={'Click here'}
           onPress={() => {
-            naviagtion.navigate('Login');
+            naviagtion.navigate('SignUp');
           }}
         />
       </View>

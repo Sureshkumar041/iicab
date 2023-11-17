@@ -1,4 +1,6 @@
 export const BLUE = '#1c537a';
+export const LIGHTBLUE = '#3276B1';
+export const DARKBLUE = '#354A7F';
 export const WHITE = '#fff';
 export const BLACK = '#000000';
 export const BORDER_INPUT = '#BDBDBD';
@@ -7,4 +9,3 @@ export const GREY = '#666666';
 export const GREEN = '#14A44D';
 export const DANGER = '#DC4C64';
 export const DARK = '#332D2D';
-

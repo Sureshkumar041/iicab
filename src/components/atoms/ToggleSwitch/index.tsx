@@ -1,5 +1,5 @@
 import {Image, StyleSheet, TouchableOpacity, View} from 'react-native';
-import {DANGER, GREEN, WHITE} from '../../../common/colors';
+import {BORDER_INPUT, DANGER, GREEN, WHITE} from '../../../common/colors';
 import IText from '../Text';
 import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -50,13 +50,10 @@ const Switch: React.FC<SwitchProps> = ({
             style={[
               styles.iconContainer,
               {
-                left: -10,
+                left: -14,
               },
             ]}>
-            <Image
-              source={ClosePng}
-              style={{width: 25, height: 14, tintColor: DANGER}}
-            />
+            <MaterialIcons name="close" style={{fontSize: 20, color: DANGER}} />
           </TouchableOpacity>
         )}
         <View>
@@ -70,7 +67,7 @@ const Switch: React.FC<SwitchProps> = ({
             style={[
               styles.iconContainer,
               {
-                right: -10,
+                right: -14,
               },
             ]}>
             <Feather name="check" style={{fontSize: 20, color: GREEN}} />
@@ -86,12 +83,12 @@ export default Switch;
 const styles = StyleSheet.create({
   switchContainer: {
     position: 'relative',
-    width: '20%',
+    width: '16%',
     borderRadius: 25,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 8,
-    paddingVertical: 6,
+    paddingVertical: 3,
     marginHorizontal: 16,
     marginVertical: 12,
     marginBottom: 12,
@@ -99,11 +96,13 @@ const styles = StyleSheet.create({
   iconContainer: {
     backgroundColor: WHITE,
     borderRadius: 25,
-    width: 40,
+    width: 32,
     aspectRatio: 1 / 1,
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
     elevation: 4,
+    borderWidth: 1,
+    borderColor: BORDER_INPUT,
   },
 });
