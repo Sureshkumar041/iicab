@@ -27,7 +27,7 @@ const IButton: React.FC<IButtonProps> = ({
     <TouchableOpacity
       style={[
         {
-          borderWidth: 1,
+          // borderWidth: 1,
           padding: 8,
           borderRadius: 5,
           backgroundColor: BLUE,
