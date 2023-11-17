@@ -23,6 +23,14 @@ const LaunchScreen = () => {
           }}
         />
       </View>
+      <View>
+        <IButton
+          title={'Test Page'}
+          onPress={() => {
+            naviagtion.navigate('LoginScreen');
+          }}
+        />
+      </View>
     </View>
   );
 };
