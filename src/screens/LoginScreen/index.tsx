@@ -15,6 +15,7 @@ import IButton from '../../components/atoms/Button';
 import ITextInput from '../../components/atoms/TextInput';
 import { height } from '../../common/constant';
 import { useNavigation } from '@react-navigation/native';
+import { BLUE, DARKBLUE } from '../../common/colors';
 
 const LoginScreen = () => {
 
@@ -33,7 +34,7 @@ const LoginScreen = () => {
                 flex: 1,
                 backgroundColor: '#fff',
             }}>
-            <StatusBar />
+            <StatusBar backgroundColor={DARKBLUE} />
             <View style={styles.container}>
                 <Image
                     source={require('../../assets/images/iDepoLogo.jpg')}
@@ -55,7 +56,7 @@ const LoginScreen = () => {
                 <TouchableOpacity onPress={ForgetPasswordScreenNavigation}>
                     <IText textType='regular' textStyle={styles.forgetPassword}>Forgot Password?</IText>
                 </TouchableOpacity>
-                <TouchableOpacity >
+                <TouchableOpacity onPress={()=>navigation?.navigate('SignUp')}>
                     <IText textType='bold' textStyle={styles.createNewAccount} >Create New Account</IText>
                 </TouchableOpacity>
                 <IButton title="Login" style={[styles.loginButton]} />

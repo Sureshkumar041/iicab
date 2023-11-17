@@ -16,7 +16,7 @@ import ITextInput from '../../components/atoms/TextInput';
 import { height } from '../../common/constant';
 import { useNavigation } from '@react-navigation/native';
 
-const forgetPasswordScreen = () => {
+const ForgetPasswordScreen = () => {
 
     const navigation = useNavigation();
 
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
 });
 
 // Export the component
-export default forgetPasswordScreen;
+export default ForgetPasswordScreen;

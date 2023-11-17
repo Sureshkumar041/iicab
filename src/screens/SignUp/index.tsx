@@ -80,7 +80,6 @@ const SignUp = () => {
             />
             <IButton
               title={'Sign Up'}
-              onPress={() => navigation.navigate('Login')}
             />
           </View>
         </View>
