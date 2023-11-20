@@ -17,12 +17,13 @@ import {height} from '../../common/constant';
 import {useNavigation} from '@react-navigation/native';
 import {IIC_ASH, IIC_BLUE} from '../../common/colors';
 
-const ForgetPasswordScreen = () => {
+const PasswordVerifiedScreen = () => {
   const navigation: any = useNavigation();
 
   const handleBackPress = () => {
     navigation.goBack();
   };
+  
 
   return (
     <KeyboardAwareScrollView
@@ -35,22 +36,25 @@ const ForgetPasswordScreen = () => {
       }}>
       <StatusBar />
       <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/iDepoLogoPNG.png')}
-          style={styles.image}
-        />
         <IText textType="bold" textStyle={styles.forgotTitle}>
           Forgot Password
         </IText>
+
+        <Image
+          source={require('../../assets/Gif/verified.gif')}
+          style={styles.image}
+        />
         <IText textType="regular" textStyle={styles.instruction}>
           Enter your login name and we'll send you a link for reset password to
           your registered email
         </IText>
+
         <ITextInput
           containerStyle={styles.input}
           label={'Login Name'}
           placeholder="Please enter username"
         />
+
         <IButton
           title="Reset Password"
           style={[styles.sendButton]}
@@ -112,9 +116,8 @@ const styles = StyleSheet.create({
   instruction: {
     paddingVertical: 20,
     color: IIC_ASH,
-    fontSize: 14,
+    fontSize: 14
   },
 });
 
-// Export the component
-export default ForgetPasswordScreen;
+export default PasswordVerifiedScreen;

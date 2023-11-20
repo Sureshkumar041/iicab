@@ -47,7 +47,7 @@ const IText: React.FC<ITextProps> = ({
     <View>
       <Text
         numberOfLines={numberOfLines}
-        style={[styles.textStyle, {fontFamily: 'muli'}, textStyle, fontStyle]}>
+        style={[styles.textStyle, textStyle, fontStyle]}>
         {children}
       </Text>
     </View>

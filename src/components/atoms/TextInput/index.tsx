@@ -35,6 +35,7 @@ interface ITextInputProps {
   multiline?: boolean;
   containerStyle?: StyleProp<ViewStyle>;
   iconName?: string;
+  onBlur?: any;
 }
 
 const ITextInput: React.FC<ITextInputProps> = ({
@@ -49,6 +50,7 @@ const ITextInput: React.FC<ITextInputProps> = ({
   multiline,
   containerStyle,
   iconName,
+  onBlur,
 }) => {
   const [secureText, setSecureText] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -129,7 +131,7 @@ export default ITextInput;
 
 const styles = StyleSheet.create({
   labelStyle: {
-    fontSize: 14,
+    fontSize: 5,
     marginBottom: 6,
   },
   textContainer: {

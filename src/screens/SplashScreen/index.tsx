@@ -4,7 +4,7 @@ import { useNavigation } from '@react-navigation/native';
 
 const SplashScreen = () => {
   const fadeAnim = useRef(new Animated.Value(0)).current;
-  const navigation = useNavigation();
+  const navigation:any = useNavigation();
 
   useEffect(() => {
     const unsubscribe = navigation.addListener('focus', () => {

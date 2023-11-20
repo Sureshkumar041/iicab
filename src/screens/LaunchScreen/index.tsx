@@ -4,7 +4,7 @@ import IText from '../../components/atoms/Text';
 import IButton from '../../components/atoms/Button';
 
 const LaunchScreen = () => {
-  const naviagtion = useNavigation();
+  const naviagtion:any = useNavigation();
   return (
     <View
       style={{

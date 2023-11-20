@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {
   View,
   Text,
@@ -13,11 +12,10 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import IText from '../../components/atoms/Text';
 import IButton from '../../components/atoms/Button';
 import ITextInput from '../../components/atoms/TextInput';
-import {height} from '../../common/constant';
 import {useNavigation} from '@react-navigation/native';
 import {IIC_ASH, IIC_BLUE} from '../../common/colors';
 
-const ForgetPasswordScreen = () => {
+const ResetPasswordScreen = () => {
   const navigation: any = useNavigation();
 
   const handleBackPress = () => {
@@ -31,7 +29,7 @@ const ForgetPasswordScreen = () => {
         padding: 12,
         flex: 1,
         backgroundColor: '#fff',
-        height: height,
+        // height: height,
       }}>
       <StatusBar />
       <View style={styles.container}>
@@ -39,24 +37,30 @@ const ForgetPasswordScreen = () => {
           source={require('../../assets/images/iDepoLogoPNG.png')}
           style={styles.image}
         />
-        <IText textType="bold" textStyle={styles.forgotTitle}>
-          Forgot Password
+        <IText textType="bold" textStyle={styles.loginTitle}>
+          Create New Password
         </IText>
         <IText textType="regular" textStyle={styles.instruction}>
-          Enter your login name and we'll send you a link for reset password to
-          your registered email
+          Your new password must be unique from those previously used.
         </IText>
         <ITextInput
+          label={'New Password'}
+          placeholder="Please enter new password"
+          secureTextEntry
+          iconName="password"
           containerStyle={styles.input}
-          label={'Login Name'}
-          placeholder="Please enter username"
         />
-        <IButton
-          title="Reset Password"
-          style={[styles.sendButton]}
-          onPress={() => navigation.push('ResetPasswordScreen')}
+        <ITextInput
+          label={'Confirm New Password'}
+          placeholder="Please re-enter the new password"
+          iconName="password"
+          containerStyle={styles.input}
+          secureTextEntry
         />
-        <TouchableOpacity onPress={handleBackPress}>
+
+        <IButton title="Save Password" style={[styles.sendButton]} />
+        {/* Back button with arrow icon */}
+        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
           <IText textType="regular" textStyle={styles.goBack}>
             Back to Login
           </IText>
@@ -71,7 +75,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 15,
-    // height: height,
   },
   goBack: {
     color: IIC_BLUE,
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     alignSelf: 'center',
   },
-  forgotTitle: {
+  loginTitle: {
     fontSize: 18,
     paddingVertical: 50,
     paddingBottom: 30,
@@ -100,9 +103,10 @@ const styles = StyleSheet.create({
   sendButton: {
     padding: 10,
     borderRadius: 5,
+    marginVertical: 20,
     width: '100%',
     alignItems: 'center',
-    marginVertical: 20,
+    backgroundColor: IIC_BLUE,
   },
   loginButtonText: {
     color: 'white',
@@ -116,5 +120,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// Export the component
-export default ForgetPasswordScreen;
+export default ResetPasswordScreen;

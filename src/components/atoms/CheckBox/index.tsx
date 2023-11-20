@@ -22,7 +22,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
     onChange(!value);
   };
   return (
-    <View style={{marginVertical: 6}}>
+    <View style={{marginVertical: 6 }}>
       <TouchableOpacity
         onPress={() => handleCheck()}
         style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -31,7 +31,7 @@ const CheckBox: React.FC<CheckBoxProps> = ({
             {label}
           </TextLabel>
         )}
-        <View style={{paddingRight: 8}}>
+        <View>
           <Checkbox
             value={value}
             onValueChange={() => handleCheck()}

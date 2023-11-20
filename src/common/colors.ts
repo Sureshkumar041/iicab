@@ -9,3 +9,6 @@ export const GREY = '#666666';
 export const GREEN = '#14A44D';
 export const DANGER = '#DC4C64';
 export const DARK = '#332D2D';
+export const IIC_BLUE = '#3276B1';
+export const IIC_ASH = '#666666'
+
