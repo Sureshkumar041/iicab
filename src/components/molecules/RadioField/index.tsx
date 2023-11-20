@@ -23,7 +23,7 @@ const RadioField: React.FC<RadioFieldProps> = ({
     onChange(val);
   };
   return (
-    <View>
+    <View style={{marginTop: 4, marginBottom: 8}}>
       <TextLabel>{label}</TextLabel>
       {options?.map((item: any, i: number) => (
         <View

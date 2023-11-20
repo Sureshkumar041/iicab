@@ -12,5 +12,5 @@ export const ROLES = {
 export const RoleOptions = [
   {role: 'transportUser', field: 'Transport User'},
   {role: 'transportCompany', field: 'Transport Company'},
-  {role: 'Driver', field: 'Driver'},
+  {role: 'driver', field: 'Driver'},
 ];

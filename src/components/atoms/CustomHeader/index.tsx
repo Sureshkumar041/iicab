@@ -1,38 +1,63 @@
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-import {DARKBLUE, WHITE} from '../../../common/colors';
+import {BLUE, DARKBLUE, WHITE} from '../../../common/colors';
 import IText from '../Text';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import React from 'react';
+import {useNavigation} from '@react-navigation/native';
 
 interface CustomHeaderProps {
   title?: any;
   closeBtn?: boolean;
   onClose?: any;
+  previous?: boolean;
 }
 
 const CustomHeader: React.FC<CustomHeaderProps> = ({
   title,
   closeBtn,
   onClose,
+  previous,
 }) => {
+  const navigation = useNavigation();
+
+  const handleNavigation = () => {
+    navigation.goBack();
+  };
   return (
     <View>
       <View
         style={{
           backgroundColor: DARKBLUE,
-          height: 40,
+          height: 50,
           flexDirection: 'row',
           alignItems: 'center',
           paddingHorizontal: 12,
         }}>
+        {previous && (
+          <TouchableOpacity>
+            <MaterialIcons
+              name="arrow-back"
+              style={[styles.iconStyle]}
+              onPress={() => handleNavigation()}
+            />
+          </TouchableOpacity>
+        )}
         <View style={{flex: 1}}>
-          <IText textStyle={{textAlign: 'center', color: WHITE, fontSize: 20}}>
+          <IText
+            textStyle={{
+              textAlign: 'center',
+              color: WHITE,
+              fontSize: 20,
+              lineHeight: 20,
+            }}>
             {title}
           </IText>
         </View>
-        <TouchableOpacity onPress={onClose}>
-          <MaterialIcons name="close" style={{fontSize: 24, color: WHITE}} />
-        </TouchableOpacity>
+        {closeBtn && (
+          <TouchableOpacity onPress={onClose}>
+            <MaterialIcons name="close" style={[styles.iconStyle]} />
+          </TouchableOpacity>
+        )}
       </View>
     </View>
   );
@@ -40,4 +65,9 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
 
 export default CustomHeader;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  iconStyle: {
+    fontSize: 24,
+    color: WHITE,
+  },
+});

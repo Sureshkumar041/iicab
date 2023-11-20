@@ -105,7 +105,7 @@ const SelectDropdown: React.FC<SelectDropdownProps> = ({
           height: '100%',
           width: '100%',
         }}>
-        <CustomHeader title={label} onClose={handleClose} />
+        <CustomHeader title={label} closeBtn onClose={handleClose} />
         <View
           style={{
             paddingVertical: 12,

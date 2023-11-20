@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {BLUE, BORDER_INPUT, WHITE} from '../../../common/colors';
+import {BLUE, BORDER_INPUT, DARKBLUE, WHITE} from '../../../common/colors';
 
 interface RadioButtonProps {
   value?: boolean;
@@ -30,7 +30,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
         marginVertical: 12,
         borderRadius: 50,
         borderWidth: 2,
-        borderColor: BLUE,
+        borderColor: DARKBLUE,
       }}>
       {isSelected && (
         <View
@@ -38,7 +38,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
             width: '100%',
             height: '100%',
             borderRadius: 50,
-            backgroundColor: BLUE,
+            backgroundColor: DARKBLUE,
           }}></View>
       )}
     </TouchableOpacity>

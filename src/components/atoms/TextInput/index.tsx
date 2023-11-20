@@ -13,6 +13,7 @@ import IText from '../Text';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {useState} from 'react';
 import {
+  BLACK,
   BLUE,
   BORDER_INPUT,
   GREY,
@@ -67,6 +68,9 @@ const ITextInput: React.FC<ITextInputProps> = ({
             paddingVertical: 4,
             flex: 1,
             textAlignVertical: multiline ? 'top' : 'center',
+            color: BLACK,
+            fontFamily: 'RobotoCondensed-Regular',
+            fontSize:14
           }}
           value={value}
           onChangeText={onChangeText}
@@ -92,7 +96,6 @@ const ITextInput: React.FC<ITextInputProps> = ({
               justifyContent: 'center',
               alignItems: 'center',
               paddingHorizontal: 8,
-              // backgroundColor: '#f5f5f6',
             }}>
             {iconName === 'email' && (
               <Image
@@ -103,7 +106,10 @@ const ITextInput: React.FC<ITextInputProps> = ({
             {iconName === 'password' && (
               <TouchableOpacity onPress={() => setSecureText(!secureText)}>
                 {secureText ? (
-                  <Ionicons name="eye" style={{fontSize: 20, color: BORDER_INPUT}} />
+                  <Ionicons
+                    name="eye"
+                    style={{fontSize: 20, color: BORDER_INPUT}}
+                  />
                 ) : (
                   <Ionicons
                     name="eye-off"
@@ -114,7 +120,6 @@ const ITextInput: React.FC<ITextInputProps> = ({
             )}
           </View>
         )}
-       
       </View>
     </View>
   );
@@ -132,7 +137,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderRadius: 5,
+    borderRadius: 3,
     columnGap: 8,
     paddingLeft: 8,
   },

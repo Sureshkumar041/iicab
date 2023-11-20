@@ -1,7 +1,7 @@
 import {Image, StatusBar, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {BLUE, DARKBLUE} from '../../common/colors';
-import IDepoLogo from '../../assets/icons/iInterchange_iDepo.png';
+import {BLUE, DARKBLUE, WHITE} from '../../common/colors';
+import SignUpImage from '../../assets/images/signUp.png';
 import RadioField from '../../components/molecules/RadioField';
 import {height, RoleOptions} from '../../common/constant';
 import {useState} from 'react';
@@ -9,9 +9,13 @@ import ITextInput from '../../components/atoms/TextInput';
 import Dropdown from '../../components/atoms/Dropdown';
 import IButton from '../../components/atoms/Button';
 import {useNavigation} from '@react-navigation/native';
+import TransportUserRegistration from './TransportUserRegistration';
+import TransportCompanyRegistration from './TransportCompanyRegistration';
+import DriverRegistration from './DriverRegistration';
+import CustomHeader from '../../components/atoms/CustomHeader';
 
 const SignUp = () => {
-  const navigation = useNavigation();
+  const [role, setRole] = useState<any>(RoleOptions[0]);
   const options = [
     {value: 'Driver', field: 'Driver'},
     {value: 'Transporter', field: 'Transporter'},
@@ -20,68 +24,46 @@ const SignUp = () => {
     {value: 'Tester', field: 'Tester'},
     {value: 'Admin', field: 'Admin'},
   ];
-  const [role, setRole] = useState<any>();
   const [depot, setDepot] = useState<any>([]);
-  const [transportCompany, setTransportCompany] = useState<any>([]);
+
   return (
     <View>
       <KeyboardAwareScrollView>
         <StatusBar barStyle={'light-content'} backgroundColor={DARKBLUE} />
-        <View>
-          <View style={{alignItems: 'center'}}>
-            <Image
-              source={IDepoLogo}
-              resizeMode={'contain'}
-              style={{width: 200, height: 150}}
-            />
-          </View>
-          <View style={{padding: 12}}>
+        <CustomHeader title={'Sign Up'} previous />
+        <View
+          style={{
+            backgroundColor: WHITE,
+            minHeight: height,
+            paddingVertical: 15,
+          }}>
+          <View style={{paddingHorizontal: 15}}>
+            <View style={{alignItems: 'center'}}>
+              {/* <Image
+                source={SignUpImage}
+                resizeMode={'contain'}
+                style={{width: 200, height: 150}}
+              /> */}
+            </View>
             <RadioField
-              label={'Select User Type'}
+              label={'Choose User Type'}
               options={RoleOptions}
               selectedValue={role}
               onChange={setRole}
             />
-            <ITextInput
-              label={'First Name'}
-              placeholder="Please enter first name"
-            />
-            <ITextInput
-              label={'Last Name'}
-              placeholder="Please enter last name"
-            />
-            <ITextInput
-              label={'Email'}
-              placeholder="Please enter email"
-              keyboardType={'email-address'}
-            />
-            <Dropdown
-              label={'Depot Associated'}
-              placeholder="Please select"
+            {/* <Dropdown
+              label={'Choose User Type'}
+              placeholder="Select company type"
               value={depot}
               itemList={options}
               onSelect={setDepot}
-            />
-            <Dropdown
-              label={'Transport Company'}
-              placeholder="Please select"
-              value={transportCompany}
-              itemList={options}
-              onSelect={setTransportCompany}
-              multiSelector={true}
-            />
-            <ITextInput
-              label={'Login Name'}
-              placeholder="Please enter login name"
-            />
-            <ITextInput
-              label={'Passowrd'}
-              placeholder="Please enter password"
-            />
-            <IButton
-              title={'Sign Up'}
-            />
+            /> */}
           </View>
+          {role?.role === 'transportUser' && <TransportUserRegistration />}
+          {role?.role === 'transportCompany' && (
+            <TransportCompanyRegistration />
+          )}
+          {role?.role === 'driver' && <DriverRegistration />}
         </View>
       </KeyboardAwareScrollView>
     </View>

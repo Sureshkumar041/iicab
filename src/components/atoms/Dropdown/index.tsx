@@ -64,7 +64,9 @@ const Dropdown: React.FC<DropdownProps> = ({
           onPress={() => setIsOpen(!isOpen)}
           style={[styles.inputContainer]}>
           {value?.length === 0 ? (
-            <IText textStyle={{color: PLACEHOLDER}}>{placeholder} </IText>
+            <IText textStyle={{color: PLACEHOLDER, fontSize: 13}}>
+              {placeholder}{' '}
+            </IText>
           ) : value?.length <= 2 ? (
             <IText>
               {value?.map((item: any, i: number) =>
@@ -91,13 +93,13 @@ const Dropdown: React.FC<DropdownProps> = ({
             <Ionicons
               onPress={() => setIsOpen(!isOpen)}
               name="caret-up-outline"
-              style={{fontSize: 20, color: BLUE}}
+              style={{fontSize: 20, color: '#999'}}
             />
           ) : (
             <Ionicons
               onPress={() => setIsOpen(!isOpen)}
               name="caret-down-outline"
-              style={{fontSize: 20, color: BLUE}}
+              style={{fontSize: 20, color: '#999'}}
             />
           )}
         </View>
@@ -124,7 +126,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     borderWidth: 1,
     borderColor: BORDER_INPUT,
-    borderRadius: 5,
+    borderRadius: 3,
   },
   inputContainer: {
     flex: 1,

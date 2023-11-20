@@ -28,8 +28,10 @@ const IButton: React.FC<IButtonProps> = ({
       style={[
         {
           // borderWidth: 1,
+          marginTop: 4,
+          marginBottom: 8,
           padding: 8,
-          borderRadius: 5,
+          borderRadius: 3,
           backgroundColor: BLUE,
         },
         style,

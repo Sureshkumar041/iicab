@@ -50,14 +50,16 @@ const Switch: React.FC<SwitchProps> = ({
             style={[
               styles.iconContainer,
               {
-                left: -14,
+                left: -10,
               },
             ]}>
             <MaterialIcons name="close" style={{fontSize: 20, color: DANGER}} />
           </TouchableOpacity>
         )}
         <View>
-          <IText textStyle={{color: WHITE}}>{isSelected ? 'YES' : 'NO'}</IText>
+          <IText textStyle={{color: WHITE, fontSize: 14,}}>
+            {isSelected ? 'YES' : 'NO'}
+          </IText>
         </View>
         {/* Visible if selected */}
         {isSelected && (
@@ -67,7 +69,7 @@ const Switch: React.FC<SwitchProps> = ({
             style={[
               styles.iconContainer,
               {
-                right: -14,
+                right: -12,
               },
             ]}>
             <Feather name="check" style={{fontSize: 20, color: GREEN}} />
@@ -87,7 +89,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 8,
+    paddingHorizontal: 12,
     paddingVertical: 3,
     marginHorizontal: 16,
     marginVertical: 12,

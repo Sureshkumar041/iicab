@@ -1,4 +1,5 @@
 import {StyleProp, StyleSheet, TextStyle, View, ViewStyle} from 'react-native';
+import {DARKBLUE} from '../../../common/colors';
 import IText from '../Text';
 
 interface TextLabelProps {
@@ -14,7 +15,7 @@ const TextLabel: React.FC<TextLabelProps> = ({
 }) => {
   return (
     <View style={[labelContainer]}>
-      <IText textType="bold" textStyle={[styles.labelStyle, labelStyle]}>
+      <IText textType={'medium'} textStyle={[styles.labelStyle, labelStyle]}>
         {children}
       </IText>
     </View>
@@ -25,7 +26,8 @@ export default TextLabel;
 
 const styles = StyleSheet.create({
   labelStyle: {
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 6,
+    color: DARKBLUE,
   },
 });
