@@ -9,125 +9,75 @@ import ITextInput from '../../components/atoms/TextInput';
 import AttachmentInput from '../../components/atoms/TextInput/AttachmentInput';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import ProgressBar from '../../components/atoms/ProgressBar';
+import CompanyDetails from '../../components/molecules/SignUpForm/TransportCompany/CompanyDetails';
+import BillingInformation from '../../components/molecules/SignUpForm/TransportCompany/BillingInformation';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import CustomHeader from '../../components/atoms/CustomHeader';
+import CompanyAddress from '../../components/molecules/SignUpForm/TransportCompany/CompanyAddress';
 
 interface TransportCompanyProps {
   role?: any;
+  openCamera?: boolean;
+  setOpenCamera?: any;
 }
 
 const TransportCompanyRegistration: React.FC<TransportCompanyProps> = ({
   role,
+  openCamera,
+  setOpenCamera,
 }) => {
-  const navigation = useNavigation();
-  const options = [
-    {value: 'Driver', field: 'Driver'},
-    {value: 'Transporter', field: 'Transporter'},
-    {value: 'Transportation companies', field: 'Transportation companies'},
-    {value: 'Developer', field: 'Developer'},
-    {value: 'Tester', field: 'Tester'},
-    {value: 'Admin', field: 'Admin'},
-  ];
-  const [depot, setDepot] = useState<any>([]);
-  const [transportCompany, setTransportCompany] = useState<any>([]);
+  const [currentStep, setCurrentStep] = useState<any>(1),
+    [step, setStep] = useState<any>([
+      {step: 1, name: 'Company Information'},
+      {step: 2, name: 'Company Address'},
+      {step: 3, name: 'Billing Information'},
+    ]),
+    [totalStep, setTotalStep] = useState<number>(3),
+    [completedStep, setCompletedStep] = useState<any>([]);
+
   return (
-    <View>
-      <View style={styles.sectionContainer}>
+    <KeyboardAwareScrollView>
+      <CustomHeader title={'Sign Up'} previous />
+      <View>
         <View style={styles.sectionView}>
-          <View style={styles.headingContainer}>
-            <MaterialIcons
-              name="emoji-transportation"
-              style={{fontSize: 26, color: DARKBLUE}}
-            />
-            <IText textType={'bold'} textStyle={{color: DARKBLUE}}>
-              Transport Company Information
-            </IText>
-          </View>
+          <IText textType={'medium'} textStyle={styles.heading}>
+            Registering as Transport Company
+          </IText>
           <View>
-            <ITextInput
-              label={'Company Name'}
-              placeholder="Please enter company name"
+            <ProgressBar
+              options={step}
+              completedOption={completedStep}
+              currentStep={currentStep}
             />
-            <Dropdown
-              label={'Company Type'}
-              placeholder="Select company type"
-              value={depot}
-              itemList={options}
-              onSelect={setDepot}
-            />
-            <AttachmentInput
-              label={'Logo'}
-              placeholder="Please upload logo"
-              inputType={'photo'}
-            />
-            <ITextInput
-              label={'Street Address'}
-              placeholder="Please enter street address"
-            />
-            <ITextInput
-              label={'Building'}
-              placeholder="Please enter building nanme"
-            />
-            <ITextInput label={'City'} placeholder="Please enter city name" />
-            <Dropdown
-              label={'Country'}
-              placeholder="Select country"
-              value={depot}
-              itemList={options}
-              onSelect={setDepot}
-            />
-            <ITextInput
-              label={'State / Providence'}
-              placeholder="Please enter state"
-            />
-            <ITextInput
-              label={'Zip Code'}
-              placeholder="Please enter zip code"
-            />
-            <ITextInput
-              label={'Contact No'}
-              placeholder="Please enter contact no"
-            />
-            <ITextInput label={'Fax No'} placeholder="Please enter fax no" />
-            <ITextInput
-              label={'Recovery Email Id'}
-              placeholder="Please enter recovery email id"
-            />
-            <Dropdown
-              label={'Classification'}
-              placeholder="Select classification"
-              value={depot}
-              itemList={options}
-              onSelect={setDepot}
-            />
-            <ITextInput
-              label={'Exemption under'}
-              placeholder="Please enter details"
-            />
-            <ITextInput
-              label={'Tax Registration No'}
-              placeholder="Please enter tax registration no"
-            />
-            <AttachmentInput
-              label={'Attachment'}
-              placeholder="Please upload attachment"
-              inputType={'document'}
-            />
-            <ITextInput
-              label={'SCAC Code'}
-              placeholder="Please enter SCAC code"
-            />
-            <ITextInput
-              label={'US DOT Permit No'}
-              placeholder="Please enter details"
-            />
-            <ITextInput
-              label={'Motor Carrier Permit No'}
-              placeholder="Please enter details"
-            />
-            <IButton title={'Sign Up'} />
           </View>
+          {currentStep === 1 && (
+            <CompanyDetails
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              completedStep={completedStep}
+              setCompletedStep={setCompletedStep}
+            />
+          )}
+          {currentStep === 2 && (
+            <CompanyAddress
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              completedStep={completedStep}
+              setCompletedStep={setCompletedStep}
+            />
+          )}
+          {currentStep === 3 && (
+            <BillingInformation
+              currentStep={currentStep}
+              setCurrentStep={setCurrentStep}
+              completedStep={completedStep}
+              setCompletedStep={setCompletedStep}
+            />
+          )}
         </View>
       </View>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
@@ -136,16 +86,8 @@ export default TransportCompanyRegistration;
 const styles = StyleSheet.create({
   sectionView: {
     backgroundColor: WHITE,
-    elevation: 8,
-    shadowOffset: {width: 1, height: 1},
     paddingTop: 15,
     paddingHorizontal: 15,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-  },
-  sectionContainer: {
-    overflow: 'hidden',
-    paddingTop: 5,
   },
   headingContainer: {
     paddingBottom: 10,
@@ -153,5 +95,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     columnGap: 14,
+  },
+  heading: {
+    fontSize: 18,
+    lineHeight: 20,
+    marginBottom: 14,
   },
 });

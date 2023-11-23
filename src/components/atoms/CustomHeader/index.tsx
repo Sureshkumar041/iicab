@@ -23,11 +23,12 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
   const handleNavigation = () => {
     navigation.goBack();
   };
+  
   return (
     <View>
       <View
         style={{
-          backgroundColor: DARKBLUE,
+          backgroundColor: WHITE,
           height: 50,
           flexDirection: 'row',
           alignItems: 'center',
@@ -42,11 +43,12 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({
             />
           </TouchableOpacity>
         )}
-        <View style={{flex: 1}}>
+        <View style={{flex: 1,marginRight:30}}>
           <IText
+            textType="bold"
             textStyle={{
               textAlign: 'center',
-              color: WHITE,
+              color: DARKBLUE,
               fontSize: 20,
               lineHeight: 20,
             }}>
@@ -68,6 +70,6 @@ export default CustomHeader;
 const styles = StyleSheet.create({
   iconStyle: {
     fontSize: 24,
-    color: WHITE,
+    color: DARKBLUE,
   },
 });

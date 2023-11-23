@@ -13,60 +13,57 @@ import TransportUserRegistration from './TransportUserRegistration';
 import TransportCompanyRegistration from './TransportCompanyRegistration';
 import DriverRegistration from './DriverRegistration';
 import CustomHeader from '../../components/atoms/CustomHeader';
+import {SafeAreaView} from 'react-native';
+import SelectRoleCard from '../../components/atoms/SelectRoleCard';
+import TruckUserImg from '../../assets/images/truckUser.jpg';
+import IText from '../../components/atoms/Text';
 
 const SignUp = () => {
-  const [role, setRole] = useState<any>(RoleOptions[0]);
-  const options = [
-    {value: 'Driver', field: 'Driver'},
-    {value: 'Transporter', field: 'Transporter'},
-    {value: 'Transportation companies', field: 'Transportation companies'},
-    {value: 'Developer', field: 'Developer'},
-    {value: 'Tester', field: 'Tester'},
-    {value: 'Admin', field: 'Admin'},
-  ];
-  const [depot, setDepot] = useState<any>([]);
+  const [role, setRole] = useState<any>([RoleOptions[0]]);
+  const [openCamera, setOpenCamera] = useState<boolean>(true);
 
   return (
-    <View>
-      <KeyboardAwareScrollView>
-        <StatusBar barStyle={'light-content'} backgroundColor={DARKBLUE} />
-        <CustomHeader title={'Sign Up'} previous />
+    <SafeAreaView>
+      <StatusBar barStyle={'dark-content'} backgroundColor={WHITE} />
+
+      <CustomHeader title={'Sign Up'} previous />
+      <View
+        style={{
+          padding: 15,
+          backgroundColor: WHITE,
+          height: height,
+        }}>
         <View
           style={{
-            backgroundColor: WHITE,
-            minHeight: height,
-            paddingVertical: 15,
+            rowGap: 8,
+            flex: 0.1,
+            justifyContent: 'center',
           }}>
-          <View style={{paddingHorizontal: 15}}>
-            <View style={{alignItems: 'center'}}>
-              {/* <Image
-                source={SignUpImage}
-                resizeMode={'contain'}
-                style={{width: 200, height: 150}}
-              /> */}
-            </View>
-            <RadioField
-              label={'Choose User Type'}
-              options={RoleOptions}
-              selectedValue={role}
-              onChange={setRole}
-            />
-            {/* <Dropdown
-              label={'Choose User Type'}
-              placeholder="Select company type"
-              value={depot}
-              itemList={options}
-              onSelect={setDepot}
-            /> */}
-          </View>
-          {role?.role === 'transportUser' && <TransportUserRegistration />}
-          {role?.role === 'transportCompany' && (
-            <TransportCompanyRegistration />
-          )}
-          {role?.role === 'driver' && <DriverRegistration />}
+          <IText
+            textStyle={{fontSize: 24, lineHeight: 26, textAlign: 'center'}}>
+            Select User Type
+          </IText>
         </View>
-      </KeyboardAwareScrollView>
-    </View>
+        <View
+          style={{
+            flex: 0.7,
+            flexDirection: 'column',
+            // justifyContent: 'space-around',
+          }}>
+          {RoleOptions?.map((item: any, i: number) => (
+            <SelectRoleCard
+              key={i}
+              image={item?.image}
+              onSelect={setRole}
+              label={item?.field}
+              color={item?.color}
+              item={item}
+              selectedValue={role}
+            />
+          ))}
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

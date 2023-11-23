@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   textStyle: {
-    fontSize: 16,
+    fontSize: 14,
     color: 'black',
     lineHeight: 18,
     fontFamily: '',

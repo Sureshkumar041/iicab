@@ -5,17 +5,29 @@ import {BORDER_INPUT, DANGER, WHITE} from '../../../common/colors';
 
 interface ImagePreviewProps {
   item: any;
+  onClear?: any;
 }
 
-const ImagePreview: React.FC<ImagePreviewProps> = ({item}) => {
+const ImagePreview: React.FC<ImagePreviewProps> = ({item, onClear}) => {
+  const handleClear = () => {
+    if (onClear) onClear(null);
+  };
   return (
     <View style={{marginVertical: 10}}>
       <View style={{position: 'relative', width: 100, height: 100}}>
         <Image
-          source={ProfileImage}
-          style={{width: 100, height: 100, borderRadius: 3}}
+          source={{uri: item}}
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 3,
+            borderWidth: 1,
+            borderColor: BORDER_INPUT,
+            objectFit:'contain'
+          }}
         />
         <TouchableOpacity
+          onPress={handleClear}
           style={{
             position: 'absolute',
             right: -8,

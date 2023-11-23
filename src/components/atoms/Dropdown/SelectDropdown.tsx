@@ -38,7 +38,7 @@ const SelectDropdown: React.FC<SelectDropdownProps> = ({
   const [selectAll, setSelectAll] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<any>(null);
   const [data, setData] = useState<any>(options);
-  const [selectedData, setSelectedData] = useState<any>([]);
+  const [selectedData, setSelectedData] = useState<any>(value);
 
   const handleSearch = () => {
     // Filter data based on the search query
@@ -145,7 +145,9 @@ const SelectDropdown: React.FC<SelectDropdownProps> = ({
                 backgroundColor: multiSelector
                   ? 'transparent'
                   : selectedData?.filter(
-                      (val: any) => val?.value === item?.value,
+                      (val: any) =>
+                        (val?.value || val?.role) ===
+                        (item?.value || item?.role),
                     )?.length > 0
                   ? '#d6dae5'
                   : 'transparent',
@@ -159,7 +161,9 @@ const SelectDropdown: React.FC<SelectDropdownProps> = ({
                 <CheckBox
                   value={
                     selectedData?.filter(
-                      (val: any) => val?.value === item?.value,
+                      (val: any) =>
+                        (val?.value || val?.role) ===
+                        (item?.value || item?.role),
                     )?.length > 0
                       ? true
                       : false
@@ -170,7 +174,7 @@ const SelectDropdown: React.FC<SelectDropdownProps> = ({
                 />
               ) : (
                 <TextLabel labelStyle={{marginBottom: 0}}>
-                  {item?.field}{' '}
+                  {item?.field}
                 </TextLabel>
               )}
             </TouchableOpacity>

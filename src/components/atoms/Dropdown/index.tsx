@@ -70,7 +70,7 @@ const Dropdown: React.FC<DropdownProps> = ({
           ) : value?.length <= 2 ? (
             <IText>
               {value?.map((item: any, i: number) =>
-                value?.length > i + 1 ? item?.value + ', ' : item?.value,
+                value?.length > i + 1 ? (item?.value ?? item?.field) + ', ' : item?.value ?? item?.field,
               )}
             </IText>
           ) : (
