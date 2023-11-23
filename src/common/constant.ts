@@ -14,3 +14,9 @@ export const RoleOptions = [
   {role: 'transportCompany', field: 'Transport Company'},
   {role: 'driver', field: 'Driver'},
 ];
+
+export const REDUCER_TYPES = {
+  LOGIN: 'Login',
+  TOKEN: 'Token',
+
+}

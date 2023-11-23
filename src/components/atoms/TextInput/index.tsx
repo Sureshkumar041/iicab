@@ -36,6 +36,7 @@ interface ITextInputProps {
   containerStyle?: StyleProp<ViewStyle>;
   iconName?: string;
   onBlur?: any;
+  errorMsg?:any;
 }
 
 const ITextInput: React.FC<ITextInputProps> = ({
@@ -51,6 +52,7 @@ const ITextInput: React.FC<ITextInputProps> = ({
   containerStyle,
   iconName,
   onBlur,
+  errorMsg,
 }) => {
   const [secureText, setSecureText] = useState<boolean>(false);
   const [isFocus, setIsFocus] = useState<boolean>(false);
@@ -119,10 +121,15 @@ const ITextInput: React.FC<ITextInputProps> = ({
                   />
                 )}
               </TouchableOpacity>
+              
             )}
           </View>
         )}
       </View>
+      <View>
+           <IText textStyle={styles.errorText}>{errorMsg}</IText>
+      </View>
+   
     </View>
   );
 };
@@ -143,4 +150,9 @@ const styles = StyleSheet.create({
     columnGap: 8,
     paddingLeft: 8,
   },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+  },
+
 });

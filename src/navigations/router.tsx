@@ -5,6 +5,7 @@ import LoginScreen from '../screens/LoginScreen';
 import SplashScreen from '../screens/SplashScreen';
 import ForgetPasswordScreen from '../screens/ForgetPassword';
 import ResetPasswordScreen from '../screens/ResetPassword';
+import PasswordVerifiedScreen from '../screens/ResetPassword/pwdVerified';
 
 
 
@@ -22,6 +23,8 @@ const Navigation = () => {
       <Stack.Screen name="LoginScreen" component={LoginScreen} />
       <Stack.Screen name="ForgetPasswordScreen" component={ForgetPasswordScreen} />
       <Stack.Screen name="ResetPasswordScreen" component={ResetPasswordScreen} />
+      <Stack.Screen name="PasswordVerifiedScreen" component={PasswordVerifiedScreen} />
+
 
 
     </Stack.Navigator>

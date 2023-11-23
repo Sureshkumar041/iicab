@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   StatusBar,
+  Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import IText from '../../components/atoms/Text';
@@ -14,22 +15,49 @@ import IButton from '../../components/atoms/Button';
 import ITextInput from '../../components/atoms/TextInput';
 import {height} from '../../common/constant';
 import {useNavigation} from '@react-navigation/native';
-import {DARKBLUE, IIC_BLUE} from '../../common/colors';
+import {DANGER, DARKBLUE, IIC_BLUE} from '../../common/colors';
 import CheckBox from '../../components/atoms/CheckBox';
 import {loginValidation} from '../../common/formValidation';
 import {Formik} from 'formik';
+import requestMultiplePermissions from '../../common/RequestPermission';
+import {useDispatch, useSelector} from 'react-redux';
+import {setLoginUserData} from '../../redux/action/userAction';
+import {connect} from 'react-redux';
 
 const LoginScreen = () => {
   const [fieldValues, setFieldValues] = useState<any>({
     loginName: null,
     password: null,
   });
+  const userData = useSelector((state: any) => state.UserReducer.userData);
+  const accessToken = useSelector(
+    (state: any) => state.UserReducer.accessToken,
+  );
+
+  const [rememberMe, setRememberMe] = useState(false);
   const navigation: any = useNavigation();
 
   const ForgetPasswordScreenNavigation = () => {
     navigation.push('ForgetPasswordScreen');
   };
-  const [rememberMe, setRememberMe] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleLogin = async () => {
+    const userData = {
+      userId: 123,
+      loginName: 'john_doe',
+    };
+    console.log('Current Redux State:', {userData, accessToken});
+    dispatch(setLoginUserData(userData));
+    console.log('Updated Redux State:', {userData, accessToken});
+    console.log('Verified');
+    Alert.alert('Successfully Logged In, Thank you!');
+  };
+
+  //Permissions Asking
+  useEffect(() => {
+    requestMultiplePermissions();
+  }, []);
 
   return (
     <KeyboardAwareScrollView
@@ -47,6 +75,7 @@ const LoginScreen = () => {
         onSubmit={values => {
           // Handle form submission here
           console.log(values);
+          handleLogin(); // Call the handleLogin function after form submission
         }}>
         {({
           handleChange,
@@ -72,10 +101,11 @@ const LoginScreen = () => {
               onChangeText={handleChange('loginName')}
               onBlur={handleBlur('loginName')}
               value={values.loginName}
+              errorMsg={
+                touched.loginName && errors.loginName && errors.loginName
+              }
             />
-            {touched.loginName && errors.loginName && (
-              <Text style={styles.errorText}>{errors.loginName}</Text>
-            )}
+
             <ITextInput
               iconName="password"
               label={'Password'}
@@ -85,10 +115,9 @@ const LoginScreen = () => {
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
+              errorMsg={touched.password && errors.password && errors.password}
             />
-            {touched.password && errors.password && (
-              <IText textStyle={styles.errorText}>{errors.loginName}</IText>
-            )}
+
             <View style={styles.rememberMeContainer}>
               <View style={{flex: 1}}>
                 <CheckBox
@@ -112,7 +141,6 @@ const LoginScreen = () => {
               style={[styles.loginButton]}
               onPress={handleSubmit}
             />
-
             <View style={styles.SignUpContainer}>
               <IText textStyle={styles.createNewAccount}>
                 Don't have an account?{' '}
@@ -136,15 +164,16 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 150,
-    height: 100,
+    width: 200,
+    height: 250,
     resizeMode: 'contain',
     alignSelf: 'center',
+    marginVertical: 10,
   },
   loginTitle: {
     fontSize: 18,
-    paddingVertical: 50,
-    paddingBottom: 30,
+    // paddingVertical: 25,
+    // paddingBottom: 20,
     alignSelf: 'center',
     color: IIC_BLUE,
   },
@@ -153,7 +182,7 @@ const styles = StyleSheet.create({
   },
   createNewAccountContainer: {
     alignSelf: 'center',
-    marginVertical: 10,
+    // marginVertical: 10,
     alignItems: 'center',
   },
   forgetPassword: {
@@ -165,7 +194,7 @@ const styles = StyleSheet.create({
   createNewAccount: {
     color: '#333333',
     alignSelf: 'center',
-    marginVertical: 20,
+    // marginVertical: 10,
   },
   loginButton: {
     padding: 10,
@@ -180,9 +209,8 @@ const styles = StyleSheet.create({
   },
 
   errorText: {
-    color: 'red',
+    color: DANGER,
     fontSize: 12,
-    // marginTop: 1,
   },
 
   signUpLink: {
@@ -204,8 +232,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: 150,
+    marginTop: 100,
   },
 });
+const mapStateToProps = (state: any) => {
+  return {
+    userData: state.UserReducer.userData,
+    accessToken: state.UserReducer.accessToken,
+  };
+};
 
-export default LoginScreen;
+export default connect(mapStateToProps)(LoginScreen);

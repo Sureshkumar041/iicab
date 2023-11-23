@@ -16,6 +16,7 @@ import ITextInput from '../../components/atoms/TextInput';
 import {height} from '../../common/constant';
 import {useNavigation} from '@react-navigation/native';
 import {IIC_ASH, IIC_BLUE} from '../../common/colors';
+import Gif from 'react-native-gif';
 
 const PasswordVerifiedScreen = () => {
   const navigation: any = useNavigation();
@@ -23,7 +24,6 @@ const PasswordVerifiedScreen = () => {
   const handleBackPress = () => {
     navigation.goBack();
   };
-  
 
   return (
     <KeyboardAwareScrollView
@@ -36,35 +36,22 @@ const PasswordVerifiedScreen = () => {
       }}>
       <StatusBar />
       <View style={styles.container}>
-        <IText textType="bold" textStyle={styles.forgotTitle}>
-          Forgot Password
-        </IText>
-
         <Image
-          source={require('../../assets/Gif/verified.gif')}
+          source={require('../../assets/images/verifyTick.png')}
           style={styles.image}
         />
+        <IText textType="bold" textStyle={styles.forgotTitle}>
+          Password Changed !
+        </IText>
         <IText textType="regular" textStyle={styles.instruction}>
-          Enter your login name and we'll send you a link for reset password to
-          your registered email
+          Your password has been Changed Successfully
         </IText>
 
-        <ITextInput
-          containerStyle={styles.input}
-          label={'Login Name'}
-          placeholder="Please enter username"
-        />
-
         <IButton
-          title="Reset Password"
+          title="Back to Login"
           style={[styles.sendButton]}
-          onPress={() => navigation.push('ResetPasswordScreen')}
+          onPress={() => navigation.push('LoginScreen')}
         />
-        <TouchableOpacity onPress={handleBackPress}>
-          <IText textType="regular" textStyle={styles.goBack}>
-            Back to Login
-          </IText>
-        </TouchableOpacity>
       </View>
     </KeyboardAwareScrollView>
   );
@@ -85,15 +72,16 @@ const styles = StyleSheet.create({
   },
 
   image: {
-    width: 150,
-    height: 100,
+    width: 180,
+    height: 150,
     resizeMode: 'contain',
     alignSelf: 'center',
+    marginTop: 150,
   },
   forgotTitle: {
-    fontSize: 18,
-    paddingVertical: 50,
-    paddingBottom: 30,
+    fontSize: 28,
+    paddingTop: 40,
+    // paddingBottom: 10,
     alignSelf: 'center',
     color: IIC_BLUE,
     fontWeight: '600',
@@ -101,12 +89,20 @@ const styles = StyleSheet.create({
   input: {
     marginVertical: 10,
   },
+  // sendButton: {
+  //   padding: 15,
+  //   borderRadius: 30,
+  //   width: '100%',
+  //   alignItems: 'center',
+  //   // marginVertical: 40,
+  // },
   sendButton: {
     padding: 10,
     borderRadius: 5,
+    marginVertical: 30,
     width: '100%',
     alignItems: 'center',
-    marginVertical: 20,
+    backgroundColor: IIC_BLUE,
   },
   loginButtonText: {
     color: 'white',
@@ -114,9 +110,11 @@ const styles = StyleSheet.create({
   },
 
   instruction: {
-    paddingVertical: 20,
+    paddingVertical: 10,
     color: IIC_ASH,
-    fontSize: 14
+    fontSize: 16,
+    alignSelf: 'center',
+    paddingBottom: 40,
   },
 });
 

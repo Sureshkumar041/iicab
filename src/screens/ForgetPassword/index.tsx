@@ -15,7 +15,10 @@ import IButton from '../../components/atoms/Button';
 import ITextInput from '../../components/atoms/TextInput';
 import {height} from '../../common/constant';
 import {useNavigation} from '@react-navigation/native';
-import {IIC_ASH, IIC_BLUE} from '../../common/colors';
+import {DARKBLUE, IIC_ASH, IIC_BLUE} from '../../common/colors';
+import CustomHeader from '../../components/atoms/CustomHeader';
+import {Formik} from 'formik';
+import {forgotPassword} from '../../common/formValidation';
 
 const ForgetPasswordScreen = () => {
   const navigation: any = useNavigation();
@@ -23,6 +26,7 @@ const ForgetPasswordScreen = () => {
   const handleBackPress = () => {
     navigation.goBack();
   };
+  
 
   return (
     <KeyboardAwareScrollView
@@ -31,37 +35,63 @@ const ForgetPasswordScreen = () => {
         padding: 12,
         flex: 1,
         backgroundColor: '#fff',
-        height: height,
+        // height: height,
       }}>
-      <StatusBar />
-      <View style={styles.container}>
-        <Image
-          source={require('../../assets/images/iDepoLogoPNG.png')}
-          style={styles.image}
-        />
-        <IText textType="bold" textStyle={styles.forgotTitle}>
-          Forgot Password
-        </IText>
-        <IText textType="regular" textStyle={styles.instruction}>
-          Enter your login name and we'll send you a link for reset password to
-          your registered email
-        </IText>
-        <ITextInput
-          containerStyle={styles.input}
-          label={'Login Name'}
-          placeholder="Please enter username"
-        />
-        <IButton
-          title="Reset Password"
-          style={[styles.sendButton]}
-          onPress={() => navigation.push('ResetPasswordScreen')}
-        />
-        <TouchableOpacity onPress={handleBackPress}>
-          <IText textType="regular" textStyle={styles.goBack}>
-            Back to Login
-          </IText>
-        </TouchableOpacity>
-      </View>
+      <StatusBar barStyle={'light-content'} backgroundColor={DARKBLUE} />
+
+      <Formik
+        initialValues={{loginName: ''}}
+        validationSchema={forgotPassword}
+        onSubmit={values => {
+          // Handle form submission here
+          console.log(values);
+          navigation.navigate('ResetPasswordScreen');
+        }}>
+        {({
+          handleChange,
+          handleBlur,
+          handleSubmit,
+          values,
+          errors,
+          touched,
+        }) => (
+          <View style={styles.container}>
+            <Image
+              source={require('../../assets/images/iDepoLogoPNG.png')}
+              style={styles.image}
+            />
+            <IText textType="bold" textStyle={styles.forgotTitle}>
+              Forgot Password
+            </IText>
+            <IText textType="regular" textStyle={styles.instruction}>
+              Enter your login name and we'll send you a link for reset password
+              to your registered email
+            </IText>
+            <ITextInput
+              containerStyle={styles.input}
+              label={'Login Name'}
+              placeholder="Please enter username"
+              onChangeText={handleChange('loginName')}
+              onBlur={handleBlur('loginName')}
+              value={values.loginName}
+              errorMsg={touched.loginName &&errors.loginName && (
+                  <IText textStyle={styles.errorText}>{errors.loginName}</IText>
+                  )}
+            />
+            <IButton
+              title="Reset Password"
+              style={[styles.sendButton]}
+              onPress={handleSubmit}
+            />
+            <TouchableOpacity onPress={handleBackPress}>
+              <IText textType="regular" textStyle={styles.goBack}>
+                Back to Login
+              </IText>
+            </TouchableOpacity>
+            
+          </View>
+        )}
+      </Formik>
     </KeyboardAwareScrollView>
   );
 };
@@ -79,20 +109,23 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     paddingTop: 10,
   },
+  errorText: {
+    color: 'red',
+    fontSize: 12,
+  },
 
   image: {
-    width: 150,
-    height: 100,
+    width: 200,
+    height: 250,
     resizeMode: 'contain',
     alignSelf: 'center',
   },
   forgotTitle: {
     fontSize: 18,
-    paddingVertical: 50,
-    paddingBottom: 30,
+    paddingVertical: 20,
+    // paddingBottom: 30,
     alignSelf: 'center',
     color: IIC_BLUE,
-    fontWeight: '600',
   },
   input: {
     marginVertical: 10,
@@ -102,7 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     width: '100%',
     alignItems: 'center',
-    marginVertical: 20,
+    marginVertical: 30,
   },
   loginButtonText: {
     color: 'white',
