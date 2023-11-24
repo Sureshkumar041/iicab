@@ -232,7 +232,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
-    marginTop: 100,
+    marginTop: 120,
   },
 });
 const mapStateToProps = (state: any) => {
